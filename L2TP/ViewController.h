@@ -14,12 +14,20 @@
 @end
 
 
-#define kVPNName @"liaogang"
-#define kServerAddress @"192.168.0.244"
+//#define kVPNName @"liaogang"
+//#define kServerAddress @"192.168.0.244"
+//#define kLocalIdentifier @"my_localIdentifier"
+//#define kRemoteIdentifier @"my_remoteIdentifier"
+//#define kKeychainServiceName @"com.abuyun.pvpn";
+//#define kPasswordReference @"123456"
+//#define kSharedSecretReference @"123456"
+
+
+#define kVPNName @"vpn"
 #define kLocalIdentifier @"my_localIdentifier"
 #define kRemoteIdentifier @"my_remoteIdentifier"
-#define kKeychainServiceName @"com.abuyun.pvpn";
-#define kPasswordReference @"123456"
-#define kSharedSecretReference @"123456"
-
+#define kKeychainServiceName @"com.abuyun.pvpn"
+#define kServerAddress @"45.32.160.250"
+#define kSharedSecretReference @"vpn"
+#define kPasswordReference @"vpn"
 

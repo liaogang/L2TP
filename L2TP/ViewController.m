@@ -63,7 +63,6 @@ NSData *persistentReferenceForSavedPassword(NSString *password, NSString *servic
         Method my_Method = class_getInstanceMethod([NEVPNManager class], @selector(isProtocolTypeValid2:));
         
         method_exchangeImplementations(ori_Method, my_Method);
-        
     }
     
     
@@ -177,6 +176,7 @@ NSData *persistentReferenceForSavedPassword(NSString *password, NSString *servic
 
 -(void)setupVPNManager{
     [self setupL2TP];
+//    [self setupIPSec];
 }
 
 - (void)setupIPSec
@@ -194,7 +194,14 @@ NSData *persistentReferenceForSavedPassword(NSString *password, NSString *servic
     p.remoteIdentifier = kRemoteIdentifier;
     p.useExtendedAuthentication = YES;
     
-    [_vpnMgr setProtocolConfiguration:p];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0) {
+        [_vpnMgr setProtocol:p];
+    } else {
+        [_vpnMgr setProtocolConfiguration:p];
+    }
+    
+    
     [_vpnMgr setOnDemandEnabled:NO];
     [_vpnMgr setLocalizedDescription:@"VPN-NAME"];//VPN自定义名字
     [_vpnMgr setEnabled:YES];
@@ -213,7 +220,13 @@ NSData *persistentReferenceForSavedPassword(NSString *password, NSString *servic
     p.disconnectOnSleep = NO;
     p.localIdentifier = kLocalIdentifier;
     
-    [_vpnMgr setProtocolConfiguration:p];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 9.0) {
+        [_vpnMgr setProtocol:p];
+    } else {
+        [_vpnMgr setProtocolConfiguration:p];
+    }
+    
     [_vpnMgr setOnDemandEnabled:NO];
     [_vpnMgr setLocalizedDescription:@"VPN-name"];//VPN自定义名字
     [_vpnMgr setEnabled:YES];

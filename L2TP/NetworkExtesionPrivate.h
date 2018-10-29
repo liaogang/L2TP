@@ -15,6 +15,29 @@ typedef enum : NSUInteger {
 } VPNType;
 
 
+@class NEContentFilterPlugin;
+
+@interface NEContentFilter : NSObject  {
+    
+    BOOL _enabled;
+    NEContentFilterPlugin* _plugin;
+    
+}
+
+@property (getter=isEnabled) BOOL enabled;                    //@synthesize enabled=_enabled - In the implementation block
+@property (copy) NEContentFilterPlugin * plugin;              //@synthesize plugin=_plugin - In the implementation block
++(BOOL)supportsSecureCoding;
+-(BOOL)checkValidityAndCollectErrors:(id)arg1 ;
+-(id)descriptionWithIndent:(int)arg1 ;
+-(id)initWithCoder:(id)arg1 ;
+-(void)encodeWithCoder:(id)arg1 ;
+-(id)copyWithZone:(NSZone*)arg1 ;
+-(void)setEnabled:(BOOL)arg1 ;
+-(BOOL)isEnabled;
+-(void)setPlugin:(NEContentFilterPlugin *)arg1 ;
+-(NEContentFilterPlugin *)plugin;
+@end
+
 
 
 @class NEProfileIngestionPayloadInfo,NEAOVPN,NEVPNApp,NEContentFilter,NEPathController;
@@ -164,13 +187,13 @@ typedef enum : NSUInteger {
 -(BOOL)checkValidityAndCollectErrors:(id)arg1 ;
 -(NSString *)pluginType;
 -(BOOL)needToUpdateKeychain;
-/*
+
  -(NEVPN *)VPN;
  -(NEVPNApp *)appVPN;
  -(long long)grade;
  -(NEAOVPN *)alwaysOnVPN;
  -(NEContentFilter *)contentFilter;
- */
+
 -(void)syncWithSystemKeychain;
 -(id)generateSignature;
 -(BOOL)isSupportedBySC;
@@ -284,7 +307,7 @@ typedef enum : NSUInteger {
 -(BOOL)isProtocolTypeValid:(long long)arg1 ;
 -(void)additionalSetup;
 -(NEVPNProtocol *)protocolConfiguration;
--(void)setProtocolConfiguration:(NEVPNProtocol *)arg1 ;
+//-(void)setProtocolConfiguration:(NEVPNProtocol *)arg1 ;
 @end
 
 @class NEHelper;
@@ -610,4 +633,77 @@ typedef enum : NSUInteger {
 
 @end
 
+
+
+
+
+
+@interface NEVPNProtocol (my)
++(BOOL)supportsSecureCoding;
+-(NSString *)serverAddress;
+-(BOOL)checkValidityAndCollectErrors:(id)arg1 ;
+-(id)descriptionWithIndent:(int)arg1 ;
+-(void)setDisconnectOnWake:(BOOL)arg1 ;
+-(id)copyLegacyDictionary;
+-(void)syncWithKeychainInDomain:(long long)arg1 configuration:(id)arg2 suffix:(id)arg3 ;
+-(void)removeKeychainItemsInDomain:(long long)arg1 ;
+
+-(NEKeychainItem *)passwordKeychainItem;
+-(NSString *)passwordEncryption;
+-(NSData *)identityDataInternal;
+-(NSString *)identityDataPassword;
+-(BOOL)identityDataImported;
+-(NSData *)identityDataHash;
+-(NEProxySettings *)proxySettings;
+-(BOOL)disconnectOnIdle;
+-(int)disconnectOnIdleTimeout;
+-(BOOL)disconnectOnSleep;
+-(BOOL)disconnectOnWake;
+-(int)disconnectOnWakeTimeout;
+-(id)initWithProtocolIdentifier:(id)arg1 ;
+-(void)setServerAddress:(NSString *)arg1 ;
+-(void)setIdentityDataInternal:(NSData *)arg1 ;
+-(void)setIdentityDataPassword:(NSString *)arg1 ;
+-(void)setIdentityDataImported:(BOOL)arg1 ;
+-(void)setIdentityDataHash:(NSData *)arg1 ;
+-(void)setProxySettings:(NEProxySettings *)arg1 ;
+-(void)setDisconnectOnIdle:(BOOL)arg1 ;
+-(void)setDisconnectOnIdleTimeout:(int)arg1 ;
+-(void)setDisconnectOnSleep:(BOOL)arg1 ;
+-(void)setDisconnectOnWakeTimeout:(int)arg1 ;
+-(void)setPasswordKeychainItem:(NEKeychainItem *)arg1 ;
+-(void)setPasswordEncryption:(NSString *)arg1 ;
+-(id)type2str;
+-(void)addDisconnectOptions:(id)arg1 ;
+-(void)initDisconnectOptions:(id)arg1 ;
+-(id)initFromLegacyDictionary:(id)arg1 ;
+-(long long)keychainDomain;
+-(void)setIdentityReferenceInternal:(NSData *)arg1 ;
+-(NSData *)identityReferenceInternal;
+-(void)syncWithKeychainInDomainCommon:(long long)arg1 ;
+-(void)setPasswordReference:(NSData *)arg1 ;
+-(NSData *)passwordReference;
+-(void)setIdentityReference:(NSData *)arg1 ;
+-(NSData *)identityReference;
+-(void)setIdentityData:(NSData *)arg1 ;
+-(NSData *)identityData;
+-(void)copyPasswordsFromKeychainInDomain:(long long)arg1 ;
+-(BOOL)disconnectOnUserSwitch;
+-(void)setDisconnectOnUserSwitch:(BOOL)arg1 ;
+-(BOOL)disconnectOnLogout;
+-(void)setDisconnectOnLogout:(BOOL)arg1 ;
+-(void)setKeychainDomain:(long long)arg1 ;
+-(id)initWithCoder:(id)arg1 ;
+-(void)encodeWithCoder:(id)arg1 ;
+-(id)description;
+-(NSUUID *)identifier;
+-(long long)type;
+-(id)copyWithZone:(NSZone*)arg1 ;
+-(id)initWithType:(long long)arg1 ;
+-(void)setIdentifier:(NSUUID *)arg1 ;
+-(void)setUsername:(NSString *)arg1 ;
+-(void)setIdentity:(NEIdentityKeychainItem *)arg1 ;
+-(NEIdentityKeychainItem *)identity;
+-(NSString *)username;
+@end
 
