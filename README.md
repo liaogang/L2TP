@@ -8,7 +8,10 @@
 iOS只提供了添加IPSec 和IKEV2的接口。L2TP和PPTP是苹果私有的。
 
 ```
-If you want to connect programatically in ios 8 you can use only IPSec or IKEv2 protocols. L2TP and PPTP protocols are private for apple. It is not possible to use L2TP and PPTP APIs in your applications. Only Apple is currently using these APIs.
+If you want to connect programatically in ios 8 you can use only IPSec or IKEv2 protocols.   
+L2TP and PPTP protocols are private for apple.   
+It is not possible to use L2TP and PPTP APIs in your applications.   
+Only Apple is currently using these APIs.
 ```
 
 
